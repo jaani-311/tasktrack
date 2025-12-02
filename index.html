@@ -6,19 +6,6 @@
 <title>Advanced Monthly Task Tracker</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-    .profile-container {
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.profile-container img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%; /* Makes it circular */
-  border: 3px solid var(--primary);
-  object-fit: cover; /* Ensures the photo fits nicely */
-}
-
 :root {
   --primary: #1976d2;
   --primary-dark: #0d47a1;
@@ -96,77 +83,81 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--primary); 
 td.weekend { background-color: rgba(255,200,200,0.3); }
 .dark td.weekend { background-color: rgba(255,100,100,0.2); }
 .dark-toggle { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.profile-photo img { display: block; margin: auto; border-radius: 50%; border: 3px solid var(--primary); width: 120px; height: 120px; }
 </style>
 </head>
 <body>
-<div class="profile-container">
-  <img id="profilePhoto" src="jaani.jpg" alt="Profile Photo">
-</div>
+<div class="wrapper">
 
-<h1>📅 Advanced Monthly Task Tracker</h1>
-
-<div class="month-bar" style="display:flex;justify-content:space-between;align-items:center;">
-  <h2 id="monthTitle">December 2025</h2>
-  <div class="dark-toggle">
-    <label>Dark Mode</label>
-    <input type="checkbox" id="darkToggle">
+  <!-- Profile Photo -->
+  <div class="profile-photo">
+    <img src="https://github.com/USERNAME/REPOSITORY_NAME/raw/main/profile.jpg" alt="Profile Photo">
   </div>
-</div>
 
-<select id="monthSelector" onchange="changeMonth()">
-  <option value="0">December 2025</option>
-  <option value="1">January 2026</option>
-  <option value="2">February 2026</option>
-  <option value="3">March 2026</option>
-  <option value="4">April 2026</option>
-  <option value="5">May 2026</option>
-  <option value="6">June 2026</option>
-  <option value="7">July 2026</option>
-  <option value="8">August 2026</option>
-  <option value="9">September 2026</option>
-  <option value="10">October 2026</option>
-  <option value="11">November 2026</option>
-</select>
+  <h1>📅 Advanced Monthly Task Tracker</h1>
 
-<div class="controls" style="margin: 14px 0;">
-  <button onclick="addTask()">➕ Add Task</button>
-  <button onclick="removeTask()">➖ Remove Task</button>
-  <button class="secondary" onclick="exportCSV()">📤 Export CSV</button>
-  <button onclick="toggleWeekly()">📉 Toggle Weekly Summary</button>
-</div>
+  <div class="month-bar" style="display:flex;justify-content:space-between;align-items:center;">
+    <h2 id="monthTitle">December 2025</h2>
+    <div class="dark-toggle">
+      <label>Dark Mode</label>
+      <input type="checkbox" id="darkToggle">
+    </div>
+  </div>
 
-<h2>📊 Task Progress</h2>
-<div class="progress-grid" id="progressGrid"></div>
+  <select id="monthSelector" onchange="changeMonth()">
+    <option value="0">December 2025</option>
+    <option value="1">January 2026</option>
+    <option value="2">February 2026</option>
+    <option value="3">March 2026</option>
+    <option value="4">April 2026</option>
+    <option value="5">May 2026</option>
+    <option value="6">June 2026</option>
+    <option value="7">July 2026</option>
+    <option value="8">August 2026</option>
+    <option value="9">September 2026</option>
+    <option value="10">October 2026</option>
+    <option value="11">November 2026</option>
+  </select>
 
-<table>
-<thead>
-<tr id="headerRow">
-  <th>Day</th>
-  <th class="taskHeader" data-color="#4caf50">
-    🌅 Exercise
-    <input type="color" class="color-picker" onchange="changeColor(0,this.value)" value="#4caf50">
-    <span class="rename-btn" onclick="renameTask(0)">✏️</span>
-  </th>
-  <th class="taskHeader" data-color="#f44336">
-    📚 Reading
-    <input type="color" class="color-picker" onchange="changeColor(1,this.value)" value="#f44336">
-    <span class="rename-btn" onclick="renameTask(1)">✏️</span>
-  </th>
-  <th class="taskHeader" data-color="#ff9800">
-    🧘 Meditation
-    <input type="color" class="color-picker" onchange="changeColor(2,this.value)" value="#ff9800">
-    <span class="rename-btn" onclick="renameTask(2)">✏️</span>
-  </th>
-</tr>
-</thead>
-<tbody id="tableBody"></tbody>
-</table>
+  <div class="controls" style="margin: 14px 0;">
+    <button onclick="addTask()">➕ Add Task</button>
+    <button onclick="removeTask()">➖ Remove Task</button>
+    <button class="secondary" onclick="exportCSV()">📤 Export CSV</button>
+    <button onclick="toggleWeekly()">📉 Toggle Weekly Summary</button>
+  </div>
 
-<div id="weeklySection" style="margin-top:28px;">
-  <h2>📈 Weekly Summary</h2>
-  <canvas id="combinedChart" height="90"></canvas>
-  <div id="taskCharts"></div>
-</div>
+  <h2>📊 Task Progress</h2>
+  <div class="progress-grid" id="progressGrid"></div>
+
+  <table>
+    <thead>
+      <tr id="headerRow">
+        <th>Day</th>
+        <th class="taskHeader" data-color="#4caf50">
+          🌅 Exercise
+          <input type="color" class="color-picker" onchange="changeColor(0,this.value)" value="#4caf50">
+          <span class="rename-btn" onclick="renameTask(0)">✏️</span>
+        </th>
+        <th class="taskHeader" data-color="#f44336">
+          📚 Reading
+          <input type="color" class="color-picker" onchange="changeColor(1,this.value)" value="#f44336">
+          <span class="rename-btn" onclick="renameTask(1)">✏️</span>
+        </th>
+        <th class="taskHeader" data-color="#ff9800">
+          🧘 Meditation
+          <input type="color" class="color-picker" onchange="changeColor(2,this.value)" value="#ff9800">
+          <span class="rename-btn" onclick="renameTask(2)">✏️</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <div id="weeklySection" style="margin-top:28px;">
+    <h2>📈 Weekly Summary</h2>
+    <canvas id="combinedChart" height="90"></canvas>
+    <div id="taskCharts"></div>
+  </div>
 
 </div>
 
@@ -212,10 +203,10 @@ function updateCharts(){const total=daysInMonth(currentMonth);const weeks=["Week
 
 function addTask(){taskCount++;taskColors.push("#"+Math.floor(Math.random()*16777215).toString(16));saveTaskColors();let th=document.createElement("th");th.className="taskHeader";th.dataset.color = taskColors[taskCount-1];th.innerHTML=`Task ${taskCount}<input type="color" class="color-picker" value="${taskColors[taskCount-1]}" onchange="changeColor(${taskCount-1},this.value)"><span class="rename-btn" onclick="renameTask(${taskCount-1})">✏️</span>`;document.getElementById("headerRow").appendChild(th);saveHeaders();generateTable();}
 function removeTask(){if(taskCount<=1)return;document.querySelector("#headerRow th:last-child").remove();taskCount--;taskColors.pop();saveTaskColors();saveHeaders();generateTable();}
-function exportCSV(){let headers=["Day"];document.querySelectorAll(".taskHeader").forEach(h=>headers.push(h.childNodes[0].nodeValue));let rows=[];const total=daysInMonth(currentMonth);for(let d=1;d<=total;d++){let row=[d];for(let t=0;t<taskCount;t++){const cb=document.getElementById(`m${currentMonth}-d${d}-t${t}`);row.push(cb.checked?"1":"0");}rows.push(row);}let csv=[headers.join(",")].concat(rows.map(r=>r.join(","))).join("\n");let blob=new Blob([csv],{type:"text/csv"});let url=URL.createObjectURL(blob);let a=document.createElement("a");a.href=url;a.download=`TaskTracker_${currentMonth}.csv`;a.click();URL.revokeObjectURL(url);}
+function exportCSV(){let headers=["Day"];document.querySelectorAll(".taskHeader").forEach(h=>headers.push(h.childNodes[0].nodeValue));let rows=[];const total=daysInMonth(currentMonth);const year=currentMonth===0?2025:2026;for(let d=1;d<=total;d++){let row=[d];for(let t=0;t<taskCount;t++){const cb=document.getElementById(`m${currentMonth}-d${d}-t${t}`);row.push(cb.checked?"1":"0");}rows.push(row.join(","));}let csvContent=[headers.join(","),...rows].join("\n");let blob=new Blob([csvContent],{type:"text/csv"});let url=URL.createObjectURL(blob);let a=document.createElement("a");a.href=url;a.download=`month_${currentMonth}_tasks.csv`;a.click();URL.revokeObjectURL(url);}
 function updateEverything(){updateProgressCards();updateCharts();}
-changeMonth();
-</script>
 
+generateTable();
+</script>
 </body>
 </html>
